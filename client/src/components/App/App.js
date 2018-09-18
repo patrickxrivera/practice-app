@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Wrapper, ErrorMessage, TextWrapper, Board, Text } from './styles';
 
-class App extends Component {
-  componentDidMount() {
-    axios
-      .get('/api')
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+const renderSuccess = ({ _this, that, fetchPair }) => (
+  <TextWrapper>
+    <Text>Wait, what does your startup do?</Text>
+    <Text>So, basically it's like a</Text>
+    <Text main>{_this}</Text>
+    <Text>for</Text>
+    <Text main>{that}!</Text>
+    <button onClick={fetchPair}>Refresh</button>
+  </TextWrapper>
+);
 
-  render() {
-    return (
-      <div>
-        <span>hi</span>
-      </div>
-    );
-  }
-}
+const renderError = (error) => <ErrorMessage>{error}</ErrorMessage>;
+
+const App = ({ error, ...rest }) => (
+  <Wrapper>
+    <Board>{error ? renderError(error) : renderSuccess(rest)}</Board>
+  </Wrapper>
+);
 
 export default App;

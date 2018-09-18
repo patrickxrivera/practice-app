@@ -1,3 +1,4 @@
 import App from './App';
+import AppContainer from './AppContainer';
 
-export { App };
+export default AppContainer;
